@@ -40,7 +40,7 @@ include_once("header.php");
 				"DB_PORT"=>"数据库端口",
 				"TABLE"=>"数据库前缀"
 			];
-			$info=file_get_contents("data/config.php");
+			$info = vita_get_url_content("data/config.php");
 			preg_match_all("/define\(\"(.*?)\",\"(.*?)\"\)/",$info,$arr);
 			foreach($arr[1] as $k=>$v){
 			if($v=='DB_HOST' or $v=='DB_USER' or $v=='DB_PASS' or $v=='DB_NAME' or $v=='DB_PORT' or $v=='TABLE'){continue;}
@@ -72,7 +72,7 @@ include_once("header.php");
 				"c_email"=>"邮箱",
 				"c_emailpass"=>"密码"
 			];
-			$info=file_get_contents("inc/smtp_config.php");
+			$info = vita_get_url_content("inc/smtp_config.php");
 			preg_match_all("/define\(\"(.*?)\",\"(.*?)\"\)/",$info,$arr);
 			foreach($arr[1] as $k=>$v){
 			?>

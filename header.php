@@ -39,7 +39,7 @@ loginchk($userid);
                             <li><a href="int_out.php" <?php show_menu_cur("int_out.php");?>>导入导出</a></li>
                             <li><a href="show.php" <?php show_menu_cur("show.php");?>>查询修改</a></li>
 							<li><a href="bank.php" <?php show_menu_cur("bank.php");?>>账户管理</a></li>
-                            <li><a href="users.php" <?php show_menu_cur("users.php");?>><?php echo "账号：".$userinfo['username'];?></a></li>							
+                            <li><a href="users.php" <?php show_menu_cur("users.php");?>><?php echo "帐号：".$userinfo['username'];?></a></li>							
                             <li><a href="login.php?action=loginout">退出</a></li>
                         </ul>
                     </div>

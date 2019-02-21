@@ -4,25 +4,28 @@ include_once("header.php");
 <div class="table stat"><div class="itlu-title"><span class="pull-right"><button type="button" class="btn btn-primary btn-xs" id="btn_add">添加分类</button></span>分类管理</div></div>
 
 <?php
-for($i=1;$i<=2;$i++){
-	if($i==1){
+show_tab(5);
+for($i=2;$i>=1;$i--){
+	if($i==2){
+		$fontcolor = "red";
+		$word = "支出";		
+	}else{
 		$fontcolor = "green";
 		$word = "收入";
-	}else{
-		$fontcolor = "red";
-		$word = "支出";
 	}
-	show_tab(5);
+	//show_tab(5);
 	$pay_type_list = show_type($i,$userid);
 	foreach($pay_type_list as $row){
 		echo "<ul class=\"table-row\">";
-			echo "<li class='".$fontcolor."'>".$row["classname"]."</li>";
-			echo "<li class='".$fontcolor."'>".$word."</li>";
-			echo "<li><a class='btn btn-primary btn-xs' href='javascript:' onclick='edit(this)' data-info='{\"classid\":\"".$row["classid"]."\",\"classtype\":\"".$i."\",\"classname\":".json_encode($row["classname"])."}'>修改</a> <a class='btn btn-success btn-xs' href='javascript:' onclick='change(this)' data-info='{\"classid\":\"".$row["classid"]."\",\"classtype\":\"".$i."\",\"classname\":".json_encode($row["classname"])."}'>转移</a> <a class='btn btn-danger btn-xs' href='javascript:' onclick='delRecord(\"classify\",".$row["classid"].")'>删除</a></li>";
+		echo "<li class='".$fontcolor."'>".$row["classname"]."</li>";
+		echo "<li class='".$fontcolor."'>".$word."</li>";
+		echo "<li><a class='btn btn-primary btn-xs' href='javascript:' onclick='edit(this)' data-info='{\"classid\":\"".$row["classid"]."\",\"classtype\":\"".$i."\",\"classname\":".json_encode($row["classname"])."}'>修改</a> <a class='btn btn-success btn-xs' href='javascript:' onclick='change(this)' data-info='{\"classid\":\"".$row["classid"]."\",\"classtype\":\"".$i."\",\"classname\":".json_encode($row["classname"])."}'>转移</a> <a class='btn btn-danger btn-xs' href='javascript:' onclick='delRecord(\"classify\",".$row["classid"].")'>删除</a></li>";
 		echo "</ul>";
     }
-	show_tab(3);
-}?>
+	//show_tab(3);
+}
+show_tab(3);
+?>
 
 
 <?php include_once("footer.php");?>

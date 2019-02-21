@@ -72,9 +72,17 @@
 <div class="table stat"><div id="stat"></div></div>
 
 <?php
+$s_classid = 'all';
+$s_starttime = $today;
+$s_endtime = $today;
+$s_startmoney = '';
+$s_endmoney = '';
+$s_remark = '';
+$s_bankid = '';
+$s_page = '1';
+
 show_tab(1);
-$get_page = get("page","1"); //获取参数
-$Prolist = itlu_page_query($userid,20,$get_page);
+$Prolist = itlu_page_search($userid,50,$s_page,$s_classid,$s_starttime,$s_endtime,$s_startmoney,$s_endmoney,$s_remark,$s_bankid);
 $thiscount = 0;
 foreach($Prolist as $row){
 	if($row['zhifu']==1){
@@ -87,7 +95,7 @@ foreach($Prolist as $row){
 	echo "<ul class=\"table-row ".$fontcolor."\">";
 		echo "<li><i class='noshow'>".$word.">></i>".$row['classname']."</li>";
 		echo "<li>".bankname($row['bankid'],$userid,"默认账户")."</li>";
-		echo "<li>".$row['acmoney']."</li>";
+		echo "<li class='t_a_r'>".$row['acmoney']."</li>";
 		if(isMobile()){
 			echo "<li>".date("m-d",$row['actime'])."</li>";
 		}else{
@@ -100,12 +108,6 @@ foreach($Prolist as $row){
 }
 show_tab(3);
 ?>
-	<?php 
-	$allcount = record_num_query($userid,"all");
-	$pages = ceil($allcount/20);	
-	if($pages > 1){?>
-	<div class="page"><?php getPageHtml($get_page,$pages,"show.php?",$thiscount,$allcount);?></div>
-	<?php }?>
 <?php
 //取账户列表
 $banklist = db_list("bank","where userid='$userid'","order by bankid asc");
@@ -115,7 +117,7 @@ foreach($banklist as $myrow){
 }
 ?>
 <script>
-$("#stat").html("<span class='pull-right noshow'>↓↓下表显示最近20条记录</span><?php echo date("Y年m月",$userinfo['regtime']);?>至今共收入<strong class='green'><?php echo state_day(date("Y-m-d",$userinfo['regtime']),$today,$userid,1);?></strong>，共支出<strong class='red'><?php echo state_day(date("Y-m-d",$userinfo['regtime']),$today,$userid,2);?></strong>");
+$("#stat").html("今天支出<strong class='red'><?php echo state_day($today,$today,$userid,2);?></strong>，收入<strong class='green'><?php echo state_day($today,$today,$userid,1);?></strong>");
 </script>
 <?php include_once("footer.php");?>
 <!--// 编辑-->

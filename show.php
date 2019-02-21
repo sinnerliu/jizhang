@@ -106,7 +106,7 @@ if($s_bankid != ""){
 			echo "<ul class=\"table-row ".$fontcolor."\">";
 				echo "<li><i class='noshow'>".$word.">></i>".$row['classname']."</li>";
 				echo "<li>".bankname($row['bankid'],$userid,"默认账户")."</li>";
-				echo "<li>".$row['acmoney']."</li>";
+				echo "<li class='t_a_r'>".$row['acmoney']."</li>";
 				if(isMobile()){
 					echo "<li>".date("m-d",$row['actime'])."</li>";
 				}else{

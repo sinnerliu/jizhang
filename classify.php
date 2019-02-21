@@ -48,8 +48,8 @@ show_tab(3);
 				<div class="form-group" id="classtype_div">
 					<label for="classtype">所属类型</label>
 					<select name="classtype" id="classtype" class="form-control">
-                        <option value="1">收入</option>
 						<option value="2">支出</option>
+                        <option value="1">收入</option>						
                     </select>
 				</div>
 				<div class="form-group" id="newclassname_div" style="display:none;">

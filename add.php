@@ -1,4 +1,12 @@
 <?php include_once("header.php");?>
+<?php
+//账户列表
+$banklist = db_list("bank","where userid='$userid'","order by bankid asc");
+$banklist_show = '';
+foreach($banklist as $myrow){
+	$banklist_show = $banklist_show."<option value='$myrow[bankid]'>".$myrow['bankname']."</option>";
+}
+?>
 <table align="left" width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor='#B3B3B3' class='table table-striped table-bordered'>
     <tr>
         <td bgcolor="#EBEBEB" class="add_th">
@@ -11,58 +19,80 @@
 		<div class="record_form" id="pay">
 			<form id="pay_form" name="pay_form" method="post" onsubmit="return checkpost(this,'pay');">
 			<input name="zhifu" type="hidden" id="zhifu" value="2" />
-			<p class="red"><label for="money">金额：<input class="w180" type="number" step="0.01" name="money" id="money" size="20" maxlength="8" /></label></p>
-			<p><label for="classid">分类：<select class="w180" name="classid" id="classid">
+			<div class="input-group">
+				<span class="input-group-label">金额</span>
+				<input class="form-field" type="number" step="0.01" name="money" id="money" size="20" maxlength="8" />
+			</div>
+			<div class="input-group">
+				<span class="input-group-label">分类</span>
+				<select class="form-field" name="classid" id="classid">
                 <?php
 				$pay_type_list = show_type(2,$userid);
 				foreach($pay_type_list as $myrow){
 					echo "<option value='$myrow[classid]'>".$myrow['classname']."</option>";
 				}
                 ?>
-            </select></label><a href="classify.php" class="addclass">添加分类</a></p>
-			<p><label for="remark">备注：<input class="w180" type="text" name="remark" id="remark" size="30" maxlength="20"></label></p>
-			<p><label for="bankid">账户：<select class="w180" name="bankid" id="bankid">
+				</select>
+			</div>
+			<div class="input-group">
+				<span class="input-group-label">账户</span>
+				<select class="form-field" name="bankid" id="bankid">
 				<option value="0">默认账户</option>
-                <?php
-				$banklist = db_list("bank","where userid='$userid'","order by bankid asc");
-				foreach($banklist as $myrow){
-					echo "<option value='$myrow[bankid]'>".$myrow['bankname']."</option>";
-				}
-                ?>
-            </select></label></p>
-			<p><label for="time">时间：<input class="w180" type="text" name="time" id="time" size="30" value="<?php echo date("Y-m-d H:i");?>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',maxDate:'<?php echo $today;?>'})" /></label></p>
-			<p class="btn_div">
-				<button name="submit" type="submit" id="submit_pay" class="btn btn-danger">支出记一笔</button>
-				<span id="pay_error" class="red"></span></p>
+                <?php echo $banklist_show;?>
+				</select>
+			</div>
+			<div class="input-group">
+				<span class="input-group-label">备注</span>
+				<input class="form-field" type="text" name="remark" id="remark" size="30" maxlength="20">
+			</div>
+			<div class="input-group">
+				<span class="input-group-label">时间</span>
+				<input class="form-field" type="text" name="time" id="time" size="30" value="<?php echo date("Y-m-d H:i");?>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',maxDate:'<?php echo $today;?>'})" />
+			</div>
+			<div class="input-group">
+				<button name="submit" type="submit" id="submit_pay" class="btn btn-danger">支出记一笔</button>				
+			</div>
+			<span id="pay_error" class="red"></span>
 			</form>
 		</div>
         
 		<div class="record_form" id="income" style="display:none;">
 			<form id="income_form" name="income_form" method="post" onsubmit="return checkpost(this,'income');">
 			<input name="zhifu" type="hidden" id="zhifu" value="1" />
-			<p class="green"><label for="money">金额：<input class="w180" type="number" step="0.01" name="money" id="money" size="20" maxlength="8" /></label></p>
-			<p><label for="classid">分类：<select class="w180" name="classid" id="classid">
+			<div class="input-group">
+				<span class="input-group-label">金额</span>
+				<input class="form-field" type="number" step="0.01" name="money" id="money" size="20" maxlength="8" />
+			</div>
+			<div class="input-group">
+				<span class="input-group-label">分类</span>
+				<select class="form-field" name="classid" id="classid">
                 <?php
 				$pay_type_list = show_type(1,$userid);
 				foreach($pay_type_list as $myrow){
 					echo "<option value='$myrow[classid]'>".$myrow['classname']."</option>";
 				}
                 ?>
-            </select></label><a href="classify.php" class="addclass">添加分类</a></p>
-			<p><label for="remark">备注：<input class="w180" type="text" name="remark" id="remark" size="30" maxlength="20"></label></p>
-			<p><label for="bankid">账户：<select class="w180" name="bankid" id="bankid">
+				</select>
+			</div>
+			<div class="input-group">
+				<span class="input-group-label">账户</span>
+				<select class="form-field" name="bankid" id="bankid">
 				<option value="0">默认账户</option>
-                <?php
-				$banklist = db_list("bank","where userid='$userid'","order by bankid asc");
-				foreach($banklist as $myrow){
-					echo "<option value='$myrow[bankid]'>".$myrow['bankname']."</option>";
-				}
-                ?>
-            </select></label></p>
-			<p><label for="time">时间：<input class="w180" type="text" name="time" id="time" size="30" value="<?php echo date("Y-m-d H:i");?>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',maxDate:'<?php echo $today;?>'})" /></label></p>
-			<p class="btn_div">
-				<button name="submit" type="submit" id="submit_income" class="btn btn-success">收入记一笔</button>
-				<span id="income_error" class="red"></span></p>
+                <?php echo $banklist_show;?>
+				</select>
+			</div>
+			<div class="input-group">
+				<span class="input-group-label">备注</span>
+				<input class="form-field" type="text" name="remark" id="remark" size="30" maxlength="20">
+			</div>
+			<div class="input-group">
+				<span class="input-group-label">时间</span>
+				<input class="form-field" type="text" name="time" id="time" size="30" value="<?php echo date("Y-m-d H:i");?>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',maxDate:'<?php echo $today;?>'})" />
+			</div>
+			<div class="input-group">
+				<button name="submit" type="submit" id="submit_income" class="btn btn-success">收入记一笔</button>				
+			</div>
+			<span id="income_error" class="red"></span>
 			</form>
 		</div>            
 		</td>

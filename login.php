@@ -15,7 +15,7 @@ if($getaction=="loginout"){
 	setcookie("userinfo", "", time()-3600);
 	alertgourl("注销成功！","login.php");
 }
-if($getaction=="register" and Multiuser==true){ // 注册
+if($getaction=="register" and Multiuser=="1"){ // 注册
 	$form_name = "reg_form";
 	$login_btn = "注册";
 	$showlogin_form = showlogin("username").showlogin("email").showlogin("password");

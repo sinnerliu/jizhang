@@ -69,6 +69,7 @@ include_once("header.php");
 			<?php
 			$keyinfo_smtp = [
 				"c_smtp"=>"SMTP",
+				"c_smtp_port"=>"端口",
 				"c_email"=>"邮箱",
 				"c_emailpass"=>"密码"
 			];

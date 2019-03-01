@@ -1,12 +1,13 @@
 <?php
 // 邮箱配置
 define("c_smtp","");
+define("c_smtp_port","");
 define("c_email","");
 define("c_emailpass","");
 
 function send_getpass_email($user_email,$user_name,$time,$url){
 	$smtpserver = c_smtp;
-	$smtpserverport = 25;
+	$smtpserverport = c_smtp_port;
 	$smtpusermail = c_email;
 	$smtpemailto = $user_email;
 	$smtpuser = c_email;
